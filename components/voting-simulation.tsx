@@ -71,7 +71,7 @@ export function VotingSimulation() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="flex items-center justify-center p-4 pb-12">
       <div className="w-full max-w-lg">
         <div className="bg-card rounded-2xl shadow-xl border border-border overflow-hidden">
           {/* Header */}

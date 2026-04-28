@@ -42,7 +42,11 @@ const mythsAndFacts: MythFact[] = [
   },
 ];
 
-export default function MythVsFact() {
+interface MythVsFactProps {
+  embedded?: boolean;
+}
+
+export default function MythVsFact({ embedded = false }: MythVsFactProps) {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const toggleCard = (id: number) => {
@@ -50,7 +54,7 @@ export default function MythVsFact() {
   };
 
   return (
-    <div className="min-h-screen bg-background px-4 py-12">
+    <div className={embedded ? "py-8" : "min-h-screen bg-background px-4 py-12"}>
       <div className="mx-auto max-w-3xl">
         {/* Header */}
         <div className="mb-10 text-center">

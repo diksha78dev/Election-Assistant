@@ -1,7 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { User, BookOpen, GraduationCap, ChevronDown, Check } from "lucide-react"
+import { useUser, UserType } from "@/context/user-context"
 
 const userTypes = [
   {
@@ -38,11 +40,21 @@ const states = [
 ]
 
 export function Onboarding() {
+  const router = useRouter()
+  const { setUserType, setSelectedState: setGlobalState } = useUser()
   const [selectedType, setSelectedType] = useState<string | null>(null)
   const [selectedState, setSelectedState] = useState<string>("")
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const isFormComplete = selectedType && selectedState
+
+  const handleContinue = () => {
+    if (isFormComplete) {
+      setUserType(selectedType as UserType)
+      setGlobalState(selectedState)
+      router.push("/dashboard")
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
@@ -138,6 +150,7 @@ export function Onboarding() {
           </div>
 
           <button
+            onClick={handleContinue}
             disabled={!isFormComplete}
             className={`w-full py-4 rounded-xl font-semibold text-base transition-all duration-200 ${
               isFormComplete

@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles } from "lucide-react"
 
@@ -33,13 +34,15 @@ export function Hero() {
 
         {/* CTA Button */}
         <div className="mt-10">
-          <Button
-            size="lg"
-            className="group h-14 rounded-full bg-gradient-to-r from-primary to-accent px-8 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30"
-          >
-            Start Journey
-            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </Button>
+          <Link href="/onboarding">
+            <Button
+              size="lg"
+              className="group h-14 rounded-full bg-gradient-to-r from-primary to-accent px-8 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30"
+            >
+              Start Journey
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
         </div>
 
         {/* Decorative element */}

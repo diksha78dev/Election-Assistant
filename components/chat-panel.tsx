@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Send, Bot, User } from "lucide-react"
+import { UserType } from "@/context/user-context"
 
 interface Message {
   id: number
@@ -9,18 +10,36 @@ interface Message {
   content: string
 }
 
-const initialMessages: Message[] = [
-  {
-    id: 1,
-    role: "assistant",
-    content:
-      "Hello! I'm your VoteWise AI assistant. I'm here to help guide you through the election process. What would you like to know about voter registration?",
-  },
-]
+interface ChatPanelProps {
+  userType?: UserType
+  currentStep?: number
+}
 
-export function ChatPanel() {
-  const [messages, setMessages] = useState<Message[]>(initialMessages)
+const stepMessages: Record<number, string> = {
+  1: "Hello! I'm your VoteWise AI assistant. I'm here to help guide you through the election process. What would you like to know about voter registration?",
+  2: "Great progress! Now let's talk about casting your vote. Do you have any questions about the voting process?",
+  3: "You're almost done! Let's discuss how votes are counted and verified. What would you like to know?",
+}
+
+export function ChatPanel({ userType, currentStep = 1 }: ChatPanelProps) {
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 1,
+      role: "assistant",
+      content: stepMessages[currentStep] || stepMessages[1],
+    },
+  ])
   const [input, setInput] = useState("")
+
+  useEffect(() => {
+    setMessages([
+      {
+        id: 1,
+        role: "assistant",
+        content: stepMessages[currentStep] || stepMessages[1],
+      },
+    ])
+  }, [currentStep])
 
   const handleSend = () => {
     if (!input.trim()) return
