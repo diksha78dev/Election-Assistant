@@ -4,6 +4,7 @@ import { Check, ClipboardList, Vote, BarChart3 } from "lucide-react"
 
 interface StepperProps {
   currentStep: number
+  onStepClick?: (step: number) => void
 }
 
 const steps = [
@@ -12,7 +13,7 @@ const steps = [
   { id: 3, label: "Counting", icon: BarChart3 },
 ]
 
-export function Stepper({ currentStep }: StepperProps) {
+export function Stepper({ currentStep, onStepClick }: StepperProps) {
   return (
     <div className="flex items-center justify-center gap-2 sm:gap-4">
       {steps.map((step, index) => {
@@ -22,14 +23,17 @@ export function Stepper({ currentStep }: StepperProps) {
 
         return (
           <div key={step.id} className="flex items-center">
-            <div className="flex flex-col items-center gap-2">
+            <button
+              onClick={() => onStepClick?.(step.id)}
+              className="flex flex-col items-center gap-2 cursor-pointer"
+            >
               <div
                 className={`flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border-2 transition-all ${
                   isCompleted
                     ? "border-primary bg-primary text-primary-foreground"
                     : isCurrent
                     ? "border-primary bg-primary/10 text-primary"
-                    : "border-border bg-card text-muted-foreground"
+                    : "border-border bg-card text-muted-foreground hover:border-primary/50"
                 }`}
               >
                 {isCompleted ? (
@@ -47,7 +51,7 @@ export function Stepper({ currentStep }: StepperProps) {
               >
                 {step.label}
               </span>
-            </div>
+            </button>
 
             {index < steps.length - 1 && (
               <div

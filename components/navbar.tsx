@@ -16,18 +16,24 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-8">
-          <Link
-            href="#about"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            About
-          </Link>
+        <div className="flex items-center gap-6 md:gap-8">
           <Link
             href="#how-it-works"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             How it Works
+          </Link>
+          <Link
+            href="/timeline"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Timeline
+          </Link>
+          <Link
+            href="/myths"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Myths vs Facts
           </Link>
         </div>
       </nav>
